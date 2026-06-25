@@ -6,7 +6,7 @@
   "scripts": {
     "dev:frontend": "vite",
     "dev:backend": "node server/index.js",
-    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend -- --port 5173\"",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend -- --host --port 5173\"",
     "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview"
