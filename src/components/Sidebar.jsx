@@ -40,6 +40,11 @@ const ICONS = {
       <polyline points="8 6 2 12 8 18"/>
     </svg>
   ),
+  shield: (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+    </svg>
+  ),
 };
 
 export function Sidebar({ activeTab, onTabChange, modelCount, onlineCount }) {
@@ -47,6 +52,7 @@ export function Sidebar({ activeTab, onTabChange, modelCount, onlineCount }) {
     { id: 'dashboard', label: 'Dashboard', icon: ICONS.grid },
     { id: 'performance', label: 'Performance', icon: ICONS.activity },
     { id: 'fastest', label: 'Fastest Models', icon: ICONS.zap },
+    { id: 'reliability', label: 'Most Reliable', icon: ICONS.shield },
   ];
 
   return (

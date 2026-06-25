@@ -255,6 +255,36 @@ function FastestTab({ models, onSelect }) {
   );
 }
 
+// ── Reliability tab ──────────────────────────────────────────────────────────
+function ReliabilityTab({ models, onSelect }) {
+  const top = models
+    .filter(m => m.uptime !== null)
+    .sort((a, b) => b.uptime - a.uptime || (a.latency || 999) - (b.latency || 999));
+
+  return (
+    <>
+      <div className="section-header" style={{ marginBottom: 24 }}>
+        <div className="section-title">🛡️ Most Reliable Models</div>
+        <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>Sorted by highest uptime score</span>
+      </div>
+
+      {top.length === 0 ? (
+        <div className="empty-state">
+          <div className="empty-state-title" style={{ color: 'var(--text-muted)' }}>Collecting data…</div>
+        </div>
+      ) : (
+        <motion.div className="models-grid">
+          <AnimatePresence mode="popLayout">
+            {top.map((model, i) => (
+              <ModelCard key={model.id} model={model} index={i} onClick={() => onSelect(model)} />
+            ))}
+          </AnimatePresence>
+        </motion.div>
+      )}
+    </>
+  );
+}
+
 // ── Settings tab ─────────────────────────────────────────────────────────────
 function SettingsTab() {
   const handleClearServerCache = async () => {
@@ -315,6 +345,7 @@ export default function App() {
                 {activeTab === 'dashboard'   && 'Model Dashboard'}
                 {activeTab === 'performance' && 'Performance Monitor'}
                 {activeTab === 'fastest'     && 'Fastest Models'}
+                {activeTab === 'reliability' && 'Reliability & Uptime'}
                 {activeTab === 'settings'    && 'System Settings'}
                 {activeTab === 'api'         && 'Developer API'}
               </div>
@@ -400,6 +431,7 @@ export default function App() {
                 {activeTab === 'dashboard'   && <DashboardTab models={models} onSelect={setSelectedModel} />}
                 {activeTab === 'performance' && <PerformanceTab models={models} onSelect={setSelectedModel} />}
                 {activeTab === 'fastest'     && <FastestTab models={models} onSelect={setSelectedModel} />}
+                {activeTab === 'reliability' && <ReliabilityTab models={models} onSelect={setSelectedModel} />}
                 {activeTab === 'settings'    && <SettingsTab />}
                 {activeTab === 'api'         && <ApiDocsTab />}
               </motion.div>
