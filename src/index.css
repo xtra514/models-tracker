@@ -933,3 +933,121 @@ code, pre, .mono {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ============ API DOCS ============ */
+.api-docs-container {
+  max-width: 800px;
+}
+
+.docs-header {
+  margin-bottom: var(--sp-8);
+}
+
+.docs-header h2 {
+  font-size: var(--text-2xl);
+  color: var(--text-primary);
+  margin-bottom: var(--sp-2);
+}
+
+.docs-header p {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  margin-bottom: var(--sp-4);
+}
+
+.api-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  background: rgba(118, 185, 0, 0.12);
+  color: var(--nvidia-green);
+  border: 1px solid var(--border-green);
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.docs-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+}
+
+.endpoint-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-6);
+}
+
+.endpoint-header {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-3);
+}
+
+.method {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+}
+
+.method.get {
+  background: rgba(0, 212, 255, 0.15);
+  color: var(--cyan);
+}
+
+.url {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.endpoint-desc {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--sp-4);
+}
+
+.code-example {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.code-tabs {
+  display: flex;
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.code-tabs span {
+  padding: 8px 16px;
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-right: 1px solid var(--border-subtle);
+}
+
+.code-tabs span.active {
+  color: var(--cyan);
+  background: rgba(0, 212, 255, 0.05);
+  border-bottom: 2px solid var(--cyan);
+}
+
+.code-example pre {
+  padding: var(--sp-4);
+  margin: 0;
+  overflow-x: auto;
+  color: var(--text-primary);
+  font-size: 13px;
+  line-height: 1.5;
+}

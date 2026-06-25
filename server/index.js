@@ -298,6 +298,68 @@ if (fs.existsSync(distPath)) {
 
 // ── Routes ────────────────────────────────────────────────────────────────────
 
+// ── API v1 (Public / Developer Endpoints) ───────────────────────────────────
+
+// GET /api/v1/models — Returns the full list of tracked models
+app.get('/api/v1/models', (req, res) => {
+  res.json({
+    success: true,
+    data: store.models.map(m => ({
+      id: m.id,
+      owner: m.owner,
+      category: m.category,
+      status: m.status,
+      latency: m.latency,
+      uptime_percent: m.uptime,
+      last_checked: m.lastChecked
+    }))
+  });
+});
+
+// GET /api/v1/models/:owner/:id — Returns data for a specific model
+app.get('/api/v1/models/:owner/:id', (req, res) => {
+  const fullId = `${req.params.owner}/${req.params.id}`;
+  const model = store.models.find(m => m.id === fullId);
+  
+  if (!model) {
+    return res.status(404).json({ success: false, error: 'Model not found' });
+  }
+
+  res.json({
+    success: true,
+    data: {
+      id: model.id,
+      owner: model.owner,
+      category: model.category,
+      status: model.status,
+      latency: model.latency,
+      uptime_percent: model.uptime,
+      last_checked: model.lastChecked
+    }
+  });
+});
+
+// GET /api/v1/stats — Returns aggregate network statistics
+app.get('/api/v1/stats', (req, res) => {
+  const models = store.models;
+  const onlineModels = models.filter(m => m.status === 'online');
+  const totalLatency = onlineModels.reduce((acc, m) => acc + (m.latency || 0), 0);
+  
+  res.json({
+    success: true,
+    data: {
+      total_models_tracked: models.length,
+      online_count: onlineModels.length,
+      degraded_count: models.filter(m => m.status === 'degraded').length,
+      offline_count: models.filter(m => m.status === 'offline').length,
+      average_latency_ms: onlineModels.length > 0 ? Math.round(totalLatency / onlineModels.length) : null,
+      last_network_probe: store.lastProbed
+    }
+  });
+});
+
+// ── Internal / Dashboard Routes ───────────────────────────────────────────────
+
 // GET /api/models — full model list with probe data (instant response)
 app.get('/api/models', (req, res) => {
   res.json({

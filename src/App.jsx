@@ -5,6 +5,7 @@ import { Sidebar } from './components/Sidebar';
 import { StatsGrid } from './components/StatsGrid';
 import { ModelCard } from './components/ModelCard';
 import { ModelDrawer } from './components/ModelDrawer';
+import { ApiDocsTab } from './components/ApiDocsTab';
 import './index.css';
 
 const CATEGORIES = ['All', 'Language', 'Vision', 'Coding', 'Embedding', 'Safety', 'Reasoning', 'Multimodal', 'Translation', 'Reward'];
@@ -315,6 +316,7 @@ export default function App() {
                 {activeTab === 'performance' && 'Performance Monitor'}
                 {activeTab === 'fastest'     && 'Fastest Models'}
                 {activeTab === 'settings'    && 'System Settings'}
+                {activeTab === 'api'         && 'Developer API'}
               </div>
             </div>
             {/* SSE / Auto-probe pill */}
@@ -399,6 +401,7 @@ export default function App() {
                 {activeTab === 'performance' && <PerformanceTab models={models} onSelect={setSelectedModel} />}
                 {activeTab === 'fastest'     && <FastestTab models={models} onSelect={setSelectedModel} />}
                 {activeTab === 'settings'    && <SettingsTab />}
+                {activeTab === 'api'         && <ApiDocsTab />}
               </motion.div>
             </AnimatePresence>
           )}
