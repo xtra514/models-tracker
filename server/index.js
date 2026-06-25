@@ -304,15 +304,7 @@ if (fs.existsSync(distPath)) {
 app.get('/api/v1/models', (req, res) => {
   res.json({
     success: true,
-    data: store.models.map(m => ({
-      id: m.id,
-      owner: m.owner,
-      category: m.category,
-      status: m.status,
-      latency: m.latency,
-      uptime_percent: m.uptime,
-      last_checked: m.lastChecked
-    }))
+    data: store.models
   });
 });
 
@@ -327,15 +319,7 @@ app.get('/api/v1/models/:owner/:id', (req, res) => {
 
   res.json({
     success: true,
-    data: {
-      id: model.id,
-      owner: model.owner,
-      category: model.category,
-      status: model.status,
-      latency: model.latency,
-      uptime_percent: model.uptime,
-      last_checked: model.lastChecked
-    }
+    data: model
   });
 });
 
