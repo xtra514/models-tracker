@@ -191,6 +191,14 @@ async function runProbeCycle() {
 
   const now = new Date().toISOString();
 
+  // Smart Optimization: Sort models so the most reliable/online models get checked first,
+  // and the frequently offline/degraded models get checked last.
+  store.models.sort((a, b) => {
+    const uptimeA = a.uptime !== null ? a.uptime : 100;
+    const uptimeB = b.uptime !== null ? b.uptime : 100;
+    return uptimeB - uptimeA;
+  });
+
   for (let i = 0; i < store.models.length; i += BATCH_SIZE) {
     const batch   = store.models.slice(i, i + BATCH_SIZE);
     const results = await Promise.all(batch.map(m => pingModel(m.id)));
